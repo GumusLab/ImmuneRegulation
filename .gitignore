@@ -1,5 +1,11 @@
 # data folder
-data/
+data/*
+
+# reinclude sample data
+!data/gwas.txt
+!data/fairfax/
+!data/westra-trans.txt
+!data/tf-meta/
 
 # mac files
 .DS_Store
