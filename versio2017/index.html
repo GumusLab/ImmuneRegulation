@@ -1,0 +1,2622 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="//igv.org/web/img/favicon.ico">
+    <title>ImmuneRegulation</title>
+
+    <!-- Bootstrap CSS - NOT REQUIRED FOR IGV -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"/>
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <link rel="shortcut icon" href="//igv.org/web/img/favicon.ico">
+
+    <!-- IGV CSS -->
+    <link rel="stylesheet" type="text/css" href="https://igv.org/web/beta/igv-beta.css">
+
+    <!-- IGV GTEx CSS -->
+    <!--link rel="stylesheet" href="http://igv.org/web/release/1.0.1/igv-1.0.1.css?v=cl80"-->
+
+    <!-- IGV Release CSS -->
+    <!--link rel="stylesheet" type="text/css" href="https://igv.org/web/release/1.0.7/igv-1.0.7.css"-->
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
+
+    <!--link rel="stylesheet" type="text/css" src="./css/jquery.dataTables.min.css"-->
+
+    <!-- jQuery JS -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap JS -  NOT REQUIRED FOR IGV -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- IGV TEST JS-->
+    <!-- https://igv.org/web/test/multilocus/igv-multilocus.js -->
+    <!-- http://igv.org/web/release/1.0.1/igv-1.0.1.min.js -->
+    <!-- https://igv.org/web/beta/igv-beta.js-->
+
+    <!-- IGV JS - DEV -->
+    <!--script src="./js/igv-selim.js"></script-->
+
+    <!-- IGV JS - Deneme DEV -->
+    <script src="./js/igv-deneme.js"></script>
+
+    <!-- IGV GTEx JS -->
+    <!--script src="http://igv.org/web/release/1.0.1/igv-1.0.1.min.js" type="text/javascript"></script-->
+    
+    <!-- IGV Release JS -->
+    <!--script type="text/javascript" src="https://igv.org/web/release/1.0.7/igv-1.0.7.js"></script-->
+
+    <!-- IGV PROD JS -->
+    <!--script type="text/javascript" src="https://igv.org/web/beta/igv-beta.js"></script-->
+
+    <!-- D3 JS -->
+    <script src='https://d3js.org/d3.v3.min.js'></script>
+
+    <!-- Bootstrap Multi-Select -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js" integrity="sha256-1fK87Pt9T7XXn/Vj3CWSfJlZkL5f73092A8YL7p7avc=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" integrity="sha256-O1jJhOIWWDc3wq75g7aXDl7aEQT2XPkieX/Mz/u4hQ0=" crossorigin="anonymous"/>    
+    
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+    <!--script type="text/javascript" charset="utf8" src="./js/jquery.dataTables.min.js"></script-->
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $('#datasetT').multiselect({
+                enableClickableOptGroups: true,
+                enableCollapsibleOptGroups: true,
+                buttonWidth: '350px',
+                nonSelectedText: 'Choose dataset(s)'
+            });
+            $('.multiselect-container').find(".caret").click();
+
+             
+        });
+    
+    </script>
+
+<style type="text/css">
+    
+#custom-search-input {
+        margin:0;
+        margin-top: 10px;
+        padding: 0;
+    }
+ 
+    #custom-search-input .search-query {
+        padding-right: 3px;
+        padding-right: 4px \9;
+        padding-left: 3px;
+        padding-left: 4px \9;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+ 
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+ 
+    #custom-search-input button {
+        border: 0;
+        background: none;
+        /** belows styles are working good */
+        padding: 2px 5px;
+        margin-top: 2px;
+        position: relative;
+        left: -28px;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        color:#D9230F;
+    }
+ 
+    .search-query:focus + button {
+        z-index: 3;   
+    }
+.graph-svg-component {
+    background-color: AliceBlue;
+}
+
+.filter {
+  display: inline-block;
+}
+
+#geneSearch {
+    background: #1974B8;  
+}
+
+#geneSearch:hover {
+    background: #035b9c;   
+}
+
+#geneSearch:active {
+    background: #1974B8;   
+}
+
+.btn, .btn-primary {
+    background: white;
+    padding: 14px 24px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    border-radius: 0;
+    border: 1 solid;
+    border-color: #bbb;
+}
+
+.btn-group, .btn-group-vertical {
+    margin-left: 10px;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+    border: 2 solid;
+    border-color: #bbb;
+}
+
+.btn-primary.active, .btn-primary:focus, .btn-primary:active, .open > .dropdown-toggle.btn-primary {
+    background: lightgray;
+    color: #000;
+    
+    box-shadow: none;
+    border: 1 solid;
+    border-color: #bbb;
+}
+
+.btn-primary:hover {
+    background: #bbb;
+    border: 1 solid;
+    border-color: #bbb;
+}
+
+.btn-primary:active, .btn-primary.raised.active {
+    background: lightgray;
+    box-shadow: none;
+    margin-bottom: -3px;
+    margin-top: 3px;
+    border: 1 solid;
+    border-color: #bbb;
+}
+
+.btn-primary.disabled, .btn-primary.disabled:focus, .btn-primary.disabled:active {
+    background: lightgray;
+    color: white;
+    opacity: .7;
+    border: 1 solid;
+    border-color: #bbb;
+}
+
+circle {
+    fill-opacity: .7;
+    fill: rgb(30,144,255);
+    stroke: #aaa; 
+}
+
+circle:hover {
+  fill: red;
+  stroke: #ccc;
+}
+
+caption {
+    font-size:medium;
+    text-align: center;
+    color: blue;
+
+}
+
+path.line {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
+path.area {
+  fill: #e7e7e7;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.x.axis line {
+  stroke: #fff;
+}
+
+.x.axis .minor {
+  stroke-opacity: .5;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.y.axis line,
+.y.axis path {
+  fill: none;
+  stroke: #000;
+}
+
+.axis--y text {
+  font: oblique 10px Georgia, serif;
+}
+
+div.tooltip {   
+    position: absolute;         
+    text-align: left;         
+    width: 160px;                    
+    height: auto;                   
+    padding: 10px;               
+    font: 12px sans-serif;      
+    background: lightsteelblue; 
+    border: 0px;        
+    border-radius: 8px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);         
+    pointer-events: none;           
+}
+
+</style>
+
+</head>
+
+
+
+<body role="document" style="background: #eee;">
+
+<nav class="navbar navbar-inverse navbar-fixed-top" style= "margin-botom:0px;">
+
+    <div class="container-fluid" style = "background: #1974B8;">
+        <div class="navbar-header">
+            <a class="navbar-brand" style="color: white; margin-left: 10px;" href="#">HIPC Portal</a>
+        </div>
+        <div id="navbar">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" style="color: white;" data-toggle="dropdown" role="button" aria-expanded="false">immuneRegulation
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="index.html">Query Browser</a>
+                        </li> 
+                        <li>
+                            <a href="doc.html">Information</a>
+                        </li>                        
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://www.mssm.edu" style = "padding-top: 0px; padding-bottom: 0px;">
+                    <img src="images/logo.gif" alt="Mount Sinai" height="50" style = "margin-right: 120px;">
+                    <!--span class="glyphicon glyphicon-user"></span> Sign Up -->
+                    </a>
+                </li>
+                <li> </li>
+            </ul>
+
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+
+</nav>
+
+
+
+<div class="container" id = "mainContainer" style="background: white; padding-bottom: 50px;"> <!-- container start -->
+
+    <div class="row" id= "browseRow" style="padding-bottom: 10px; margin-top: 58px; margin-bottom: 20px; margin-right: -7px; margin-left: -7px; background: #ddd; border-style: solid; border-width: 1px; border-radius: 5px; border-color: #888888;">
+        
+         <div class="col-md-12" style="margin-left: 30px;">
+            
+            <label for="filterChr">Study Type:</label>
+
+            <select name="sometext" id="studyT" onclick="updateDatasets()" style="margin-top: 10px; margin-left: 10px; margin-right: 20px; font-size: 16px;width: 180px !important; min-width: 120px; max-width: 180px; vertical-align: middle; padding: 5px; border-radius: 5px;" size="3"  >
+                <option value="1">Cis-eQTL</option>
+                <option value="2">Trans-eQTL</option>
+                <option value="3" disabled>Transcription Factors</option>
+                
+            </select>
+
+            <label for="filterChr">Dataset:</label>
+
+            <select id="datasetT" multiple="multiple" style="background: white; margin-left: 10px; font-size: 14px;">
+                <optgroup label="Whole Blood">
+                    <option value="11">Framingham</option>
+                    <option value="12" >GTEx</option>
+                    <option value="13" >Westra</option>
+                </optgroup>
+                <optgroup label="Monocytes">
+                    <option value="21">African American</option>
+                    <option value="22">East Asian</option>
+                    <option value="23">European American</option>
+                    <option value="24">Jager-meta</option>
+                    <option value="25">Fairfax</option>
+                    <option value="26">Fairfax - European American</option>
+                </optgroup>
+                <optgroup label="CD4+">
+                    <option value="31">African American</option>
+                    <option value="32">East Asian</option>
+                    <option value="33">European American</option>
+                    <option value="34">Jager-meta</option>
+                </optgroup>
+                <optgroup label="B-cell">
+                    <option value="41">Fairfax</option>
+                </optgroup>
+                <optgroup label="Neutrophils">
+                    <option value="51">Fairfax</option>
+                </optgroup>
+                <optgroup label="Exposure Studies - Monocyte">
+                    <option value="61">LPS - 2hours</option>
+                    <option value="62">LPS - 24hours</option>
+                    <option value="63">IFN-gamma</option>
+                </optgroup>
+
+                <optgroup label="Lymphoblastoid Cell lines - 1000Genomes">
+                    <option value="71">European (Eur) </option>
+                    <option value="72">Yoruba in Ibadan, Nigeria (YRI)</option>
+                </optgroup>
+            </select>
+            <!--select name="sometext" multiple="multiple" id="datasetT" style="margin-top: 10px; margin-left: 10px; margin-right: 20px; font-size: 16px;width: 150px !important; min-width: 120px; max-width: 150px;  vertical-align: middle; padding: 5px; border-radius: 5px;" size="3" >
+                <option value="1">Framingham</option>
+                <option value="2">GTEx</option>
+                <option value="3">Westra</option>
+                
+            </select-->
+
+            <!--label for="filterChr">Gene:</label-->
+            <input type="text"  rows="3" id="geneVal" class="search-query form-control" placeholder="Gene" style = "display:inline; width: 200px; margin-left: 25px;" />
+            
+            <!--input type="text" id="geneVal" name="FirstName" value="" size="10" style="margin-left: 10px;"-->
+            <button onclick="searchGene()" id="geneSearch" class="btn btn-primary active" style="width:100px; height:30px; padding:5px; margin:5px; margin-left: 30px; border: black; border-radius: 5px; color: white;"> Search </button>
+
+        </div>
+
+
+    </div>
+
+    <div class="row" id="filterRow" style="margin-top: 10px; visibility:hidden;">
+
+        <div class="col-md-6 filter" id="filterCol" style=" margin-left: 10px; border-style: double; border-width: 1px; border-color: #ccc; background: whitesmoke;">
+           
+            <label for="filterChr">SNP Chr:</label>
+
+            <select name="sometext" id="filterChr" style="margin-top: 10px; margin-left: 10px; margin-right: 20px; font-size: 16px;width: 40px !important; min-width: 40px; max-width: 40px;" size="1" >
+                <option value="c1">1</option>
+                <option value="c2">2</option>
+                <option value="c3">3</option>
+                <option value="c4">4</option>
+                <option value="c5">5</option>
+                <option value="c6">6</option>
+                <option value="c7">7</option>
+                <option value="c8">8</option>
+                <option value="c9">9</option>
+                <option value="c10">10</option>
+                <option value="c11">11</option>
+                <option value="c12">12</option>
+                <option value="c13">13</option>
+                <option value="c14">14</option>
+                <option value="c15">15</option>
+                <option value="c16">16</option>
+                <option value="c17">17</option>
+                <option value="c18">18</option>
+                <option value="c19">19</option>
+                <option value="c20">20</option>
+                <option value="c21">21</option>
+                <option value="c22">22</option>
+                
+            </select>
+
+            <label for="filterChr">Position:</label>
+            <input type="text" id="filterStart" name="FirstName" value="0" size="9" style="margin-left: 10px;">
+            <text style="font-size: 15px; margin-top: 12px;"> - </text>
+            <input type="text" id="filterEnd" name="FirstName" value="End" size="9">
+        
+            <button onclick="filter()" id="filter" class="btn btn-primary active" style="width:50px; height:30px; padding:5px; margin:5px; margin-left:20px;"> Filter </button> 
+            
+            <button onclick="unfilter()" id="unfilter" class="btn btn-primary disabled" style="width:50px; height:30px; padding:5px; margin:5px; ">  Undo </button> 
+        </div>
+
+    </div> <!-- FilterRow finish -->
+
+
+    <div class="row" id="transRow" style="visibility:hidden;">
+          
+        <!--div class="col-md-7" id="transDiv" style="margin-left:10px; margin-top:10px; padding:5px;  ">
+        </div-->
+
+    </div>
+
+
+    <div class="row" id="igvDiv" style="margin-top: -10px; margin-left: -5px; margin-right: -5px; padding:5px; visibility: hidden; border:1px solid lightgray">
+    </div>
+
+
+    <div class="row" id= "controlsRow" style = "margin-top:5px; visibility:hidden;">
+
+        <div class="col-md-3" style = "padding-left: 0px;">
+            <button onclick="first()" id="firstB" class="btn btn-primary active" style="width:45px; height:30px; padding:5px; margin:5px; margin-left:10px;"> << </button> 
+            
+            <button onclick="prev()" id="prevB" class="btn btn-primary active" style="width:45px; height:30px; padding:5px; margin:5px;"> < </button> 
+        </div>
+        
+        <div class="col-md-5">
+            <p id="displayRange" style="text-align: center; font-size: 14px; margin-top:10px; font-weight:500;"> Displaying 1 - 50 </p> 
+        </div>
+
+        <div class="col-md-3" style = "margin-left:30px;"> 
+            <button onclick="next()" id="nextB" class="btn btn-primary active" style="width:45px; height:30px; padding:5px; margin:5px;"> > </button> 
+            <button onclick="last()" id="lastB" class="btn btn-primary active" style="width:45px; height:30px; padding:5px; margin:5px;"> >> </button>
+        </div>
+    </div>
+
+
+</div>  <!-- container finish-->
+
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom" style= "margin:5px; border: 1 px solid; border-color: gray; height: 60px;">
+
+    <nav class="nav-upper" style = "background: #3f97ca; height: 60px; padding-top:10px;">
+        <div class="container-fluid" style = "text-align:center; color:white; font-size: normal;">
+            <ul class="nav navbar-upper">
+                <li> ImmuneRegulation <span> | </span> Version 1.0.0 </li>
+                <li> <span><a href = "http://research.mssm.edu/gumuslab/" style = "color:white; text-decoration:underline;"> Gümüş Lab </a></span> 
+                    <span> | </span>Icahn School of Medicine at Mount Sinai </li>
+            </ul>
+        </div>
+    </nav>
+    <!--div class="container-fluid" style = "background: #3f97ca; height: 70px;">
+        
+        <div id="bottom-navbar" style = "text-align:center; color:white; font-size: medium;" >
+            <div class="nav navbar-nav" style="display: inline-block; float: none;">
+                <ul class="nav navbar-nav">
+                    <li> Gumus Lab </li>
+                    <li> Icahn School of Medicine at Mount Sinai </li>
+                    <li> 2017 </li>
+                </ul>
+            </div>
+        </div>
+    </div-->
+
+</nav>
+
+<div class="container-fluid">
+
+    <footer>
+        <p></p>
+    </footer>
+
+</div>
+
+
+<script type="text/javascript">
+
+    //$('#example-multiple-optgroups').multiselect();
+
+    var original, totalTrans, currenti = 0, currentj = 49;
+    var geneData = [];
+    var transData = [];
+    var cisData = [];
+    var SNP_interest;
+    var svg;
+    var wdth, hght = 410;
+    var margin = {top: 30, right: 20, bottom: 30, left: 50};
+    //width = 600 - margin.left - margin.right,
+    //height = 270 - margin.top - margin.bottom;
+
+    var highlightC = 0;
+    var filterToggle = 0;
+    
+    var viz = d3.select('#transDiv');
+
+    
+    function searchGene() {
+        geneData = []; //reset geneData
+        currenti = 0;
+        currentj = 49;
+        SNP_interest = "";
+        
+        var study = document.getElementById("studyT").value;
+        var dataset = document.getElementById("datasetT").value;
+        var datasetvalues = $('#datasetT').val();
+        var gene = document.getElementById("geneVal").value;
+        var geneArray = gene.split(',');
+
+        $('#geneSetDiv').empty();
+
+        console.log("Study: ", study);
+        console.log("Dataset: ", dataset);
+
+        //Cis-eQTL
+        if(study == 1) {
+            $('#transRow').empty(); // Remove contents of transDiv (trans eqtls)
+            $('#geneDataDiv').empty(); //remove Gene Data
+            $('#eqtlDataDiv').empty(); // Remove eqtl details 
+
+            var filterRow = document.getElementById("filterRow"); 
+            filterRow.style.height = "0px";
+            filterRow.style.visibility = "hidden";
+
+            var filterCol = document.getElementById("filterCol"); 
+            filterCol.style.height = "0px";
+            filterCol.style.visibility = "hidden";
+            
+            removeControls();
+ 
+            drawCis(datasetvalues);
+        }
+                
+        // Trans-eQTL
+        else if (study == 2) { 
+            $('#igvDiv').empty(); // Remove contents of igvDiv (cis eqtls)
+            var igvDiv = document.getElementById("igvDiv"); 
+            igvDiv.style.visibility = "hidden";
+
+            $('#eqtlDataDiv').empty(); // Remove eqtl details 
+
+            var transDiv = document.getElementById("transDiv");
+            
+            if(transDiv === null) 
+                createTransDiv();
+
+            if(gene == "")
+                gene = "all";
+            
+            console.log("Gene: ", gene);
+
+            var vizRow = document.getElementById("transRow"); 
+            vizRow.style.visibility = "visible";
+
+            var filterCol = document.getElementById("filterCol"); 
+            filterCol.style.height = "45px";
+            filterCol.style.visibility = "visible";
+
+            //Add All Trans-eqtl Results
+            addTrans(gene);
+            
+            //dataCheck(gene, transData);
+        }
+    }
+
+
+    function updateDatasets() {
+        var study = document.getElementById("studyT").value;
+        var datasetvalues = $('#datasetT').val();
+        console.log("Dataset values:::before::", datasetvalues);
+
+        if(study == 2)
+        {
+            $('*[value="12"]').parent().attr("class", "hidden");
+            $('*[value="21"]').parent().attr("class", "hidden");
+            $('*[value="22"]').parent().attr("class", "hidden");
+            $('*[value="23"]').parent().attr("class", "hidden");
+            $('*[value="31"]').parent().attr("class", "hidden");
+            $('*[value="32"]').parent().attr("class", "hidden");
+            $('*[value="33"]').parent().attr("class", "hidden");
+            $('*[value="71"]').parent().attr("class", "hidden");
+            $('*[value="72"]').parent().attr("class", "hidden");
+
+            $('*[value="24"]').parent().attr("class", "checkbox");
+            $('*[value="34"]').parent().attr("class", "checkbox");
+
+            //$('.multiselect-container').find(".checkbox", value="21").attr("class", "hidden");   (option[value="21"]).attr("class", "hidden");
+
+        }
+
+        if(study == 1)
+        {
+            $('*[value="12"]').parent().attr("class", "checkbox");
+            $('*[value="21"]').parent().attr("class", "checkbox");
+            $('*[value="22"]').parent().attr("class", "checkbox");
+            $('*[value="23"]').parent().attr("class", "checkbox");
+            $('*[value="31"]').parent().attr("class", "checkbox");
+            $('*[value="32"]').parent().attr("class", "checkbox");
+            $('*[value="33"]').parent().attr("class", "checkbox");
+            $('*[value="71"]').parent().attr("class", "checkbox");
+            $('*[value="72"]').parent().attr("class", "checkbox");
+
+
+            $('*[value="24"]').parent().attr("class", "hidden");
+            $('*[value="34"]').parent().attr("class", "hidden");
+
+            
+        }
+
+        //uncheck all boxes
+        $('*[value="11"]').attr('checked', false);
+        $('*[value="12"]').attr('checked', false);
+        $('*[value="13"]').attr('checked', false);
+        $('*[value="21"]').attr('checked', false);
+        $('*[value="22"]').attr('checked', false);
+        $('*[value="23"]').attr('checked', false);
+        $('*[value="24"]').attr('checked', false);
+        $('*[value="25"]').attr('checked', false);
+        $('*[value="26"]').attr('checked', false);
+        $('*[value="31"]').attr('checked', false);
+        $('*[value="32"]').attr('checked', false);
+        $('*[value="33"]').attr('checked', false);
+        $('*[value="34"]').attr('checked', false);
+        $('*[value="41"]').attr('checked', false);
+        $('*[value="51"]').attr('checked', false);
+        $('*[value="61"]').attr('checked', false);
+        $('*[value="62"]').attr('checked', false);
+        $('*[value="63"]').attr('checked', false);
+        $('*[value="71"]').attr('checked', false);
+        $('*[value="72"]').attr('checked', false);
+
+        /*$('*[value="11"]').parent().attr("checked", false);
+        $('*[value="12"]').parent().attr("checked", false);
+        $('*[value="13"]').parent().attr("checked", false);
+        $('*[value="21"]').parent().attr("checked", false);
+        $('*[value="22"]').parent().attr("checked", false);
+        $('*[value="23"]').parent().attr("checked", false);
+        $('*[value="24"]').parent().attr("checked", false);
+        $('*[value="25"]').parent().attr("checked", false);
+        $('*[value="26"]').parent().attr("checked", false);
+        $('*[value="31"]').parent().attr("checked", false);
+        $('*[value="32"]').parent().attr("checked", false);
+        $('*[value="33"]').parent().attr("checked", false);
+        $('*[value="34"]').parent().attr("checked", false);
+        $('*[value="41"]').parent().attr("checked", false);
+        $('*[value="51"]').parent().attr("checked", false);
+        $('*[value="61"]').parent().attr("checked", false);
+        $('*[value="62"]').parent().attr("checked", false);
+        $('*[value="63"]').parent().attr("checked", false);*/
+
+        $('#datasetT').prop('value', null); // = null;
+        $('#datasetT').attr('selectedIndex', "-1");
+            
+        //datasetvalues = $('#datasetT').val();          
+
+        $('.multiselect').find(".multiselect-selected-text").attr('contentEditable', "true"); 
+        $('.multiselect').find(".multiselect-selected-text").prop('innerHTML', "Choose dataset(s)");    
+    }
+
+
+    function createTransDiv() {      
+        var vizRow = document.getElementById("transRow");
+        var transDivNode = document.createElement('div');
+
+        transDivNode.id = "transDiv";
+        transDivNode.className = "col-md-6";
+        //transDivNode.style.border = "1px solid #ccc";
+        transDivNode.style.padding = "5px";
+        transDivNode.style.marginLeft = "10px";
+        transDivNode.style.marginTop = "10px";
+        //transDivNode.style.paddingBottom = "5px";
+
+        vizRow.appendChild(transDivNode);
+    }
+
+
+    function isInArray(value, array) {
+        return array.indexOf(value) > -1;
+    }
+
+
+    function addTrans(gene) {
+        var totalTrans = 0;
+        transData = [];
+        var toggle11 = 0, toggle13 = 0, toggle24 = 0, toggle25 = 0, toggle26 = 0, toggle34 = 0, toggle41 = 0, toggle51 = 0, toggle61 = 0, toggle62 = 0, toggle63 = 0;
+        //var backData, backData2;
+
+        var dataset = document.getElementById("datasetT").value;
+        var datasetvalues = $('#datasetT').val();
+        
+        //var gene = document.getElementById("geneVal").value;
+        var geneArray = gene.trim().split(/\s*,\s*/);
+        var geneSetData = [];
+
+        console.log("Dataset values: ", datasetvalues);
+        console.log("geneArray: ", geneArray);
+        //console.log("TOM1: ", isInArray(TOM1, geneArray));
+        var g = geneArray[0];
+        var framfile = "./data/framingham/" + g;
+
+        for (var i = 0; i < datasetvalues.length; i++) 
+        {
+            if(datasetvalues[i] == 11)
+                toggle11 = 1;
+            else if(datasetvalues[i] == 13)
+                toggle13 = 1;
+            else if(datasetvalues[i] == 24)
+                toggle24 = 1;
+            else if(datasetvalues[i] == 25)
+                toggle25 = 1;
+            else if(datasetvalues[i] == 26)
+                toggle26 = 1;
+            else if(datasetvalues[i] == 34)
+                toggle34 = 1;
+            else if(datasetvalues[i] == 41)
+                toggle41 = 1;
+            else if(datasetvalues[i] == 51)
+                toggle51 = 1;
+            else if(datasetvalues[i] == 61)
+                toggle61 = 1;
+            else if(datasetvalues[i] == 62)
+                toggle62 = 1;
+            else if(datasetvalues[i] == 63)
+                toggle63 = 1;
+        }
+        
+        if(toggle11 == 1) 
+        {
+            d3.tsv("./data/westra-trans.txt", function(rows13) {
+                d3.tsv("./data/jager/monocytes-trans.txt", function(rows24) {
+                    d3.tsv("./data/fairfax/mono-trans.txt", function(rows25) {
+                        d3.tsv("./data/fairfax/mono-trans-naive.txt", function(rows26) {
+                            d3.tsv("./data/jager/cd4T-trans.txt", function(rows34) {
+                                d3.tsv("./data/fairfax/bcell-trans.txt", function(rows41) {
+                                    d3.tsv("./data/fairfax/neutrophils-trans-final.txt", function(rows51) {
+                                        d3.tsv("./data/fairfax/mono-trans-lps2.txt", function(rows61) {
+                                            d3.tsv("./data/fairfax/mono-trans-lps24.txt", function(rows62) {
+                                                d3.tsv("./data/fairfax/mono-trans-ifn.txt", function(rows63) {
+                                                    d3.tsv(framfile, function(rows11) {
+
+                                                        if(toggle11 == 1)
+                                                            transData.push(rows11);
+
+                                                        if(toggle13 == 1)
+                                                            transData.push(rows13);
+                                                        
+                                                        if(toggle24 == 1)
+                                                            transData.push(rows24);
+                                                            
+                                                        if(toggle25 == 1)
+                                                            transData.push(rows25);
+                                                            
+                                                        if(toggle26 == 1)
+                                                            transData.push(rows26);
+
+                                                        if(toggle34 == 1)
+                                                            transData.push(rows34);
+                                                        
+                                                        if(toggle41 == 1)
+                                                            transData.push(rows41);
+                                                            
+                                                        if(toggle51 == 1)
+                                                            transData.push(rows51);
+                                                            
+                                                        if(toggle61 == 1)
+                                                            transData.push(rows61);
+
+                                                        if(toggle62 == 1)
+                                                            transData.push(rows62);
+                                                        
+                                                        if(toggle63 == 1)
+                                                            transData.push(rows63);
+
+                                                        console.log("TRANS DATA: ", transData);
+                                                        console.log("Total trans: ", transData.length);
+
+                                                        if(geneArray.length > 1)
+                                                        {
+                                                            for(var i = 0; i < transData.length; i++)
+                                                                for(var j = 0; j < transData[i].length; j++)
+                                                                    if( isInArray(transData[i][j].Gene, geneArray) )
+                                                                        geneSetData.push(transData[i][j]);  
+                                                            
+                                                            console.log("Gene Set Data: ", geneSetData);
+                                                            calcCommonTrans(geneSetData);
+                                                        }
+
+                                                        else
+                                                            dataCheck(transData, gene);
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+
+        }
+
+        
+        else
+        {
+            d3.tsv("./data/westra-trans.txt", function(rows13) {
+                d3.tsv("./data/jager/monocytes-trans.txt", function(rows24) {
+                    d3.tsv("./data/fairfax/mono-trans.txt", function(rows25) {
+                        d3.tsv("./data/fairfax/mono-trans-naive.txt", function(rows26) {
+                            d3.tsv("./data/jager/cd4T-trans.txt", function(rows34) {
+                                d3.tsv("./data/fairfax/bcell-trans.txt", function(rows41) {
+                                    d3.tsv("./data/fairfax/neutrophils-trans-final.txt", function(rows51) {
+                                        d3.tsv("./data/fairfax/mono-trans-lps2.txt", function(rows61) {
+                                            d3.tsv("./data/fairfax/mono-trans-lps24.txt", function(rows62) {
+                                                d3.tsv("./data/fairfax/mono-trans-ifn.txt", function(rows63) {
+
+                                                    if(toggle13 == 1)
+                                                        transData.push(rows13);
+                                                    
+                                                    if(toggle24 == 1)
+                                                        transData.push(rows24);
+                                                        
+                                                    if(toggle25 == 1)
+                                                        transData.push(rows25);
+                                                        
+                                                    if(toggle26 == 1)
+                                                        transData.push(rows26);
+
+                                                    if(toggle34 == 1)
+                                                        transData.push(rows34);
+                                                    
+                                                    if(toggle41 == 1)
+                                                        transData.push(rows41);
+                                                        
+                                                    if(toggle51 == 1)
+                                                        transData.push(rows51);
+                                                        
+                                                    if(toggle61 == 1)
+                                                        transData.push(rows61);
+
+                                                    if(toggle62 == 1)
+                                                        transData.push(rows62);
+                                                    
+                                                    if(toggle63 == 1)
+                                                        transData.push(rows63);
+
+                                                    console.log("TRANS DATA: ", transData);
+                                                    console.log("Total trans: ", transData.length);
+                                                    
+                                                    if(geneArray.length > 1)
+                                                    {
+                                                        for(var i = 0; i < transData.length; i++)
+                                                            for(var j = 0; j < transData[i].length; j++)
+                                                                if( isInArray(transData[i][j].Gene, geneArray) )
+                                                                    geneSetData.push(transData[i][j]);  
+                                                        
+                                                        console.log("Gene Set Data: ", geneSetData);
+                                                        calcCommonTrans(geneSetData);
+                                                    }
+
+                                                    else
+                                                        dataCheck(transData, gene);
+
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+
+        }
+
+    }
+
+
+    function addG() {
+        var btn = document.getElementById("wBtn");
+        btn.className = "btn btn-primary active btn-block"; 
+        btn.style.background = "lightgray";
+
+        btn = document.getElementById("gBtn");
+
+        btn.className = "btn btn-primary disabled btn-block"; 
+        btn.style.background = "gray";
+
+        d3.select("svg").remove();
+    }
+    
+
+    function dataCheck(data, gene) {
+        //var sliced = data.slice(i,j);
+        geneData = [];
+
+        if(data == null || data[0] == null) {  
+                var vizDiv = document.getElementById("transDiv");            
+                vizDiv.style.fontSize = "14px";
+                vizDiv.style.fontWeight = "bold";
+                vizDiv.style.textAlign = "center";
+                vizDiv.style.border = "1px solid black";
+                vizDiv.innerHTML = "No Results Found";
+                removeControls();
+                removefilterControl();
+                $('#geneDataDiv').empty(); //remove Gene Data
+        }
+
+        //IF no gene is specified, show all data
+        else if(gene == "all") {
+
+            for(var i = 0; i < data.length; i++)
+                for(var j = 0; j < data[i].length; j++)
+                    geneData.push(data[i][j]);
+
+            geneData.sort(function(a, b){
+                return a.PValue-b.PValue;
+            });
+
+            dataSlicer(geneData, 0, 49);
+            currenti = 0;
+            currentj = 49;
+            updateRange(currenti, currentj);
+        }
+
+        else {
+            for(var i = 0; i < data.length; i++)
+                for(var j = 0; j < data[i].length; j++)
+                    if(data[i][j].Gene == gene)
+                        geneData.push(data[i][j]);
+
+            geneData.sort(function(a, b){
+                return a.PValue-b.PValue;
+            });
+
+            var dataSize = geneData.length;
+            console.log("geneData length: ", dataSize);
+            
+            var vizDiv = document.getElementById("transDiv");
+
+            if(dataSize == 0) {              
+                vizDiv.style.fontSize = "14px";
+                vizDiv.style.fontWeight = "bold";
+                vizDiv.style.textAlign = "center";
+                vizDiv.style.border = "1px solid black";
+                vizDiv.innerHTML = "No Results Found";
+                removeControls();
+                removefilterControl();
+                $('#geneDataDiv').empty(); //remove Gene Data
+            }
+
+            else {
+                $('#transDiv').empty();
+                //vizDiv.innerHTML = "";
+                vizDiv.style.border = "";
+                vizDiv.style.textAlign = "left";
+                
+                removeControls();
+
+                           
+                addGeneData(gene, dataSize);
+                addfilterControl();
+                drawTrans(geneData, geneData[0].PValue, dataSize);
+                if(dataSize > 50) {
+                    addControls();
+                    //updateRange(0, 49);
+                }
+            }
+            
+        }
+        //console.log("geneData[0]: ", geneData[0]);
+          
+    }
+
+
+    function dataSlicer(data, i, j) {
+        var sliced = data.slice(i,j);
+        console.log("Drawing... i: ",i, " j: ", j);
+        
+        $('#transDiv').empty();
+        var vizDiv = document.getElementById("transDiv");
+        vizDiv.style.border = "";
+        
+        addGeneData("all", data.length);
+        addfilterControl();
+
+        drawTrans(sliced, data[0].PValue, sliced.length);  
+        addControls();
+    
+    }
+
+
+    function addControls() {
+        var controlsRow = document.getElementById("controlsRow"); 
+        var vizDiv = document.getElementById("transDiv");
+        
+        var ControlClone = controlsRow.cloneNode(true);
+
+        vizDiv.appendChild(ControlClone);
+        ControlClone.style.visibility = "visible";
+    }
+
+    function removeControls() {
+        var controlsRow = document.getElementById("controlsRow"); 
+        controlsRow.style.visibility = "hidden"; 
+    }
+
+    function addfilterControl() {
+        var filterRow = document.getElementById("filterRow"); 
+        filterRow.style.visibility = "visible";
+
+        var filterCol = document.getElementById("filterCol"); 
+        filterCol.style.visibility = "visible";
+        filterCol.style.height = "45x";
+    }
+
+    function removefilterControl() {
+        var filterRow = document.getElementById("filterRow"); 
+        filterRow.style.visibility = "hidden";
+
+        var filterCol = document.getElementById("filterCol"); 
+        filterCol.style.visibility = "hidden";
+        filterCol.style.height = "0px";
+    }
+
+    function updateRange(currenti, currentj) {
+        var RangeNode = document.getElementById("displayRange");
+        var content = "Displaying " + (currenti+1) + " - " + (currentj+1);
+        RangeNode.innerHTML = content;
+    }
+
+    function first() {  
+        currenti = 0;
+        currentj = 49;
+
+        dataSlicer(geneData, currenti, currentj);
+        updateRange(currenti, currentj);
+    }
+
+    function last() {
+        var len = geneData.length;
+
+        currenti = (parseInt(len / 50) * 50);
+        currentj = currenti + 49;
+        
+        dataSlicer(geneData, currenti, currentj);
+        updateRange(currenti, currentj);
+    }
+
+    function next() {
+        currenti = currentj + 1;
+        currentj = currentj + 50;
+        
+        dataSlicer(geneData, currenti, currentj);
+        updateRange(currenti, currentj);
+    }
+
+    function prev() {
+        if (currenti == 0)
+            return;
+        currenti = currenti - 50;
+        currentj = currentj - 50;
+        
+        dataSlicer(geneData, currenti, currentj);
+        updateRange(currenti, currentj);
+    }
+
+
+    function addGeneData(gene, dataSize) {
+        var geneNode = document.getElementById("geneDataDiv");
+        var geneInnerNode = document.getElementById("geneDataInnerDiv");
+        var htmlcontent = "Gene(s): " + gene;
+
+        if(geneNode === null) {
+            geneNode = document.createElement('div'); 
+            
+            geneNode.id = "geneDataDiv";
+            geneNode.className = "row";
+            geneNode.style.marginTop = "20px";
+            geneNode.style.marginLeft = "-5px";
+            geneNode.style.fontSize = "14px";
+            geneNode.style.fontWeight = "bold";
+
+            $("#browseRow").after(geneNode);
+        }
+
+        if(geneInnerNode === null) {
+            geneInnerNode = document.createElement('div');
+
+            geneInnerNode.id = "geneDataInnerDiv";
+            geneInnerNode.className = "col-md-6";
+            geneInnerNode.style.border = "1px solid #ccc";
+            geneInnerNode.style.paddingLeft = "15px";
+            geneInnerNode.style.paddingRight = "15px";
+            geneInnerNode.style.paddingTop = "5px";
+            geneInnerNode.style.paddingBottom = "5px";
+
+            geneNode.appendChild(geneInnerNode);
+        }
+
+        geneInnerNode.innerHTML = "Results Overview: "
+        
+        if(gene == "all")
+            htmlcontent = "Gene(s): ALL";
+
+        //Append Gene Name
+        var p = document.createElement('span');
+        var ptext = document.createTextNode(htmlcontent);
+        p.style.marginLeft = "25px";
+        p.style.fontSize = "16px";
+        p.appendChild(ptext);
+        geneInnerNode.appendChild(p);
+
+        //Append Data Size
+        var d = document.createElement('span');
+        var dtext = dataSize + " trans-eQTLs";
+        var dnode = document.createTextNode(dtext);
+        d.style.marginLeft = "25px";
+        d.style.fontSize = "14px";
+        d.style.fontWeight = "normal";
+        d.appendChild(dnode);
+        geneInnerNode.appendChild(d);
+
+        //Append Ensembl Link
+        if(gene !== "all") {
+            //Add Link
+            var a = document.createElement('a');
+            var linkText = document.createTextNode("Ensembl");
+            a.style.marginLeft = "25px";
+            a.appendChild(linkText);
+        
+            a.href = "http://www.ensembl.org/Homo_sapiens/Gene/ExpressionAtlas?g=" + gene; 
+            geneInnerNode.appendChild(a);
+
+            var l = document.createElement('span');
+            l.className = "fa fa-external-link";
+            l.style.marginLeft = "2px";
+            l.style.color = "blue";
+            geneInnerNode.appendChild(l);
+            //<span class="fa fa-external-link" aria-hidden="true"></span>
+        }
+        
+    }
+
+
+    function filter() {
+        var chr = document.getElementById("filterChr").value;
+        var start = document.getElementById("filterStart").value;
+        var end = document.getElementById("filterEnd").value;
+
+        var endToggle = 0;
+
+        if (end != "End")
+            endToggle = 1;
+        
+        if (end == "")
+            endToggle = 0;
+
+        start = parseInt(start, 10);
+        end = parseInt(end, 10);
+        
+        highlightC = chr;
+
+        console.log("Start: ", start);
+        console.log("End: ", end);
+        console.log("EndToggle: ", endToggle);
+
+        var selection = svg.selectAll("circle");
+
+        selection.attr('r', function (d) {
+            if(endToggle == 1)
+                if (d.SNPChr == chr && d.SNPChrPos >= start && d.SNPChrPos <= end)
+                    return 5;
+                else
+                    return 0;
+
+            else if(endToggle == 0) {
+                if ( ("c" + d.SNPChr) == chr && start <= d.SNPChrPos){
+                    console.log("Chr Pos: ", d.SNPChrPos);
+                    return 5;
+                }
+                else {
+                    console.log("Pos: ", d.SNPChrPos);
+                    return 0;
+                }
+            }
+
+        });
+
+        var btn = document.getElementById("filter");
+        btn.className = "btn btn-primary disabled";
+
+        var btn = document.getElementById("unfilter");
+        btn.className = "btn btn-primary active";
+    }
+
+
+    function unfilter() {
+        highlightC = 0;
+        var selection = svg.selectAll("circle");
+
+        selection.attr('r', '5');
+        
+        var btn = document.getElementById("filter");
+        btn.className = "btn btn-primary active";
+
+        var btn = document.getElementById("unfilter");
+        btn.className = "btn btn-primary disabled";   
+    }
+
+
+    function openFilter() {
+        var filterDiv = document.getElementsByClassName('filter');
+        var i = filterDiv.length;
+
+        //var parent = document.getElementById("filterRow");
+        var parent = document.getElementById("filterPl");
+        var child = document.getElementById("openF");
+
+        if(filterToggle == 0) {
+            
+            while(i--) {
+                filterDiv[i].style.visibility = "visible";
+            }         
+            
+            parent.className = "col-md-1";
+
+            child.style.width = "70px";
+            child.innerHTML = "Hide <<";
+
+            filterToggle = 1;
+        }
+
+        else {
+            while(i--) {
+                filterDiv[i].style.visibility = "hidden";
+            }         
+            
+            parent.className = "col-md-2";
+
+            child.style.width = "155px";
+            child.innerHTML = "Filter Results >>";
+
+            filterToggle = 0;
+        }
+
+        //parent.removeChild(child);
+    }
+
+
+    function eqtlDetails(PValue, SNPName, SNPChr, SNPChrPos, Gene, ProbeChr, ProbeCenterChrPos ) {
+        var eqtlNode = document.getElementById("eqtlDataDiv");
+        var eqtlTitleNode = document.getElementById("eqtlTitleDiv");
+        var eqtlInnerNode = document.getElementById("eqtlDataInnerDiv");
+        var rsTableNode = document.getElementById("rsTableDiv");
+
+        var htmlcontent = PValue;
+        var ensembleLink = "http://www.ensembl.org/Homo_sapiens/Gene/ExpressionAtlas?g=" + Gene;
+        var snpPosLink = "https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + SNPChr + SNPChrPos;
+        var genePosLink = "https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + SNPChr + SNPChrPos;
+
+        var span = "<span class='fa fa-external-link' style='margin-left: 2px; color: blue;'></span>";
+        var space ="<span style='margin-left: 25px;'></span>";
+
+        if(eqtlNode === null) {
+            eqtlNode = document.createElement('div'); 
+            
+            eqtlNode.id = "eqtlDataDiv";
+            eqtlNode.className = "col-md-5";
+            eqtlNode.style.marginTop = "0px";
+            eqtlNode.style.marginLeft = "80px";
+
+            eqtlNode.style.fontSize = "14px";
+            //eqtlNode.style.border = "1px solid #ccc";
+            //eqtlNode.style.fontWeight = "bold";
+
+            //geneNode.appendChild(eqtlNode);
+            $("#transDiv").after(eqtlNode);
+        }
+
+        if(eqtlTitleNode === null) {
+            eqtlTitleNode = document.createElement('div');
+
+            eqtlTitleNode.id = "eqtlTitleDiv";
+            eqtlTitleNode.style.textAlign = "center";
+            //eqtlInnerNode.className = "col-md-4";
+            //eqtlTitleNode.style.border = "1px solid #ccc";
+            eqtlTitleNode.style.padding = "5px";
+
+            eqtlNode.appendChild(eqtlTitleNode);
+        }
+        
+        if(eqtlInnerNode === null) {
+            eqtlInnerNode = document.createElement('div');
+
+            eqtlInnerNode.id = "eqtlDataInnerDiv";
+            //eqtlInnerNode.className = "col-md-4";
+            eqtlInnerNode.style.border = "1px solid #ccc";
+            eqtlInnerNode.style.padding = "10px";
+            eqtlInnerNode.style.marginBottom = "20px";
+
+            eqtlNode.appendChild(eqtlInnerNode);
+        }
+
+        if(rsTableNode === null) {
+            rsTableNode = document.createElement('table');
+
+            rsTableNode.id = "rsTableDiv";
+            rsTableNode.className = "display";
+            rsTableNode.style.border = "1px solid #ccc";
+            rsTableNode.style.marginTop = "20px";
+            rsTableNode.style.marginLeft = "0px";
+            rsTableNode.style.padding = "5px";
+            rsTableNode.style.fontSize = "small";
+
+            eqtlNode.appendChild(rsTableNode);
+        }
+    
+        eqtlTitleNode.innerHTML = "<strong>" + "Trans-eQTL Details: " + "</strong>";
+
+        eqtlInnerNode.innerHTML = "<strong>" + "P-value: " + "</strong>" + PValue + "<br/>" + "<strong>" + "SNP-Pos: " + "</strong>" + SNPChr + ":" + SNPChrPos + "<a href = " + snpPosLink + ">" + space + "    cis-Browser </span></a>" + span +  "<br/>" + "<strong>" + "Gene: " + "</strong>" + Gene + "<a href = " + ensembleLink + ">" + space + " Ensembl </a>" + span + "<br/>"  + "<strong>" + "Gene-Pos: " + "</strong>" + ProbeChr + ":" + ProbeCenterChrPos + "<a href = " + genePosLink + ">" + space + " cis-Browser </a>" + span +  "<br/>" + "<strong>" + "rsid: " + "</strong>" + SNPName;
+
+        /*eqtlInnerNode.innerHTML = "<strong>" + "P-value: " + "</strong>" + PValue + "<br/>" + "<strong>" + "SNP-Pos: " + "</strong>" + SNPChr + ":" + SNPChrPos + "<br/>" + "<strong>" + "Gene: " + "</strong>" + Gene + "<br/>"  + "<strong>" + "Gene-Pos: " + "</strong>" + ProbeChr + ":" + ProbeCenterChrPos + "<br/>" + "<strong>" + "rsid: " + "</strong>" + SNPName; */
+       /* 
+        if(gene == "all")
+            htmlcontent = "ALL";
+
+        //Append Gene Name
+        var p = document.createElement('span');
+        var ptext = document.createTextNode(htmlcontent);
+        p.style.marginLeft = "25px";
+        p.style.fontSize = "16px";
+        p.appendChild(ptext);
+        geneInnerNode.appendChild(p);
+
+        //Append Data Size
+        var d = document.createElement('span');
+        var dtext = dataSize + " trans-eQTLs";
+        var dnode = document.createTextNode(dtext);
+        d.style.marginLeft = "25px";
+        d.style.fontSize = "14px";
+        d.style.fontWeight = "normal";
+        d.appendChild(dnode);
+        geneInnerNode.appendChild(d);
+    */
+        //Append RS Link
+        //if(gene !== "all") {
+
+            //Add dbSNP Link
+            var a = document.createElement('a');
+            var linkText = document.createTextNode("dbSNP");
+            a.style.marginLeft = "25px";
+            a.appendChild(linkText);
+        
+            a.href = "https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + SNPName; 
+            eqtlInnerNode.appendChild(a);
+
+            var l = document.createElement('span');
+            l.className = "fa fa-external-link";
+            l.style.marginLeft = "2px";
+            l.style.color = "blue";
+            eqtlInnerNode.appendChild(l);
+            //<span class="fa fa-external-link" aria-hidden="true"></span>
+        //} 
+
+            //Add details link
+            var b = document.createElement('a');
+            var linkText = document.createTextNode("Other Gene Targets");
+            b.style.marginLeft = "25px";
+            b.appendChild(linkText);
+            eqtlInnerNode.appendChild(b);
+
+            var newSpan = document.createElement('span');
+            newSpan.style.marginLeft = "2px";
+            newSpan.className = "glyphicon glyphicon-chevron-down";
+            eqtlInnerNode.appendChild(newSpan);
+
+            //Table Initialization
+            var header = rsTableNode.createTHead();                    
+            var tblBody = document.createElement("tbody");
+            rsTableNode.appendChild(tblBody);
+            //var tr = document.getElementById('rsTableDiv').tHead.children[0];
+            var th = document.createElement('th');
+            th.innerHTML = "Gene";
+           // header.appendChild(th);
+            th.innerHTML = "P-Value";
+           // header.appendChild(th);
+
+            //a.href = "https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + SNPName; 
+            b.onclick = function() {               
+                var formatP = d3.format(",.4e");         
+                var rsArr = [];
+                //SNP_interest = SNPName;
+
+                //console.log("TRANS DATA: ", transData);
+                for(var i = 0; i < transData.length; i++) {
+                    for(var j = 0; j < transData[i].length; j++)
+                        if(transData[i][j].SNPName === SNPName){
+                            rsArr.push(transData[i][j]);
+                            rsArr[rsArr.length-1].PValue = formatP(rsArr[rsArr.length-1].PValue);
+                        }
+                }
+
+                console.log("AAAA: ", rsArr[0]);
+
+                $('#rsTableDiv').DataTable( {
+                    data: rsArr,
+
+                    columns: [
+                        { data: 'Gene', "title": 'Gene', 
+                            "render": function ( data, type, full, meta ) {
+                                return '<a href="#" onClick="addTrans(\''+data+'\')">'+data+'</a>';
+                            } 
+                        },
+                        { data: 'PValue', "title": 'P-Value' },                      
+                        { data: 'ProbeChr', "title": 'Chr' },
+                        { data: 'ProbeCenterChrPos', "title": 'Center-Pos'}         
+                    ]
+                } );
+
+                //$('#rsTableDiv.caption').text('Table: eQTL Target Genes'); 
+                $('#rsTableDiv').append('<caption>Table: eQTL Target Genes</caption>');
+
+            }
+            
+    }
+
+
+    function compare(a,b) {
+          if (a.Gene.length < b.Gene.length)
+            return -1;
+          if (a.Gene.length > b.Gene.length)
+            return 1;
+          
+          return 0;
+    }
+
+
+    function geneSetTrans(frequency, source) {
+
+        var sourceArr = [], geneArr = [], fullArr = [], obj = {}, genes, seenGenes = [];
+        var transNode = document.getElementById("transDiv");
+        var geneSetNode = document.getElementById("geneSetDiv");
+
+        var filterRow = document.getElementById("filterRow");
+        filterRow.style.height = "0px";
+        filterRow.style.visibility = "hidden";
+
+        var filterCol = document.getElementById("filterCol");
+        filterCol.style.height = "0px";
+        filterCol.style.visibility = "hidden";
+
+        sourceArr = Object.keys(source);
+        console.log("GGG: ", sourceArr.length);
+        for(var i = 0; i < sourceArr.length; i++) {
+            seenGenes = [];
+            genes = "";
+            Object.keys(source[sourceArr[i]]).forEach(function(key) {
+
+                //for (var j = 0; j < seenGenes.length; j++) {
+                    if( !isInArray(source[sourceArr[i]][key].Gene, seenGenes) ) {
+                        seenGenes.push(source[sourceArr[i]][key].Gene);
+                        genes = genes + source[sourceArr[i]][key].Gene + "; ";
+                    }
+
+            });
+            //genes = source[sourceArr[i]].Gene;
+            genes = genes.slice(0, -2);
+            console.log("GGG: ", genes);
+            if(seenGenes.length > 1) {
+                obj = {rsid: sourceArr[i], Gene: genes };
+                fullArr.push(obj); //= source[i].key; 
+            }
+        }
+
+        if(geneSetNode === null) {
+            geneSetNode = document.createElement('table');
+
+            geneSetNode.id = "geneSetDiv";
+            geneSetNode.className = "display";
+            geneSetNode.style.border = "1px solid #ccc";
+            geneSetNode.style.marginTop = "-20px";
+            //geneSetNode.style.marginLeft = "50px";
+            //geneSetNode.style.marginRight = "50px";
+            geneSetNode.style.padding = "5px";
+            //geneSetNode.style.fontSize = "small";
+
+            transNode.appendChild(geneSetNode);
+        }
+
+        //Table Initialization
+            var header = geneSetNode.createTHead();                    
+            var tblBody = document.createElement("tbody");
+            geneSetNode.appendChild(tblBody);
+            //var tr = document.getElementById('rsTableDiv').tHead.children[0];
+            var th = document.createElement('th');
+
+            console.log("SSSS: ", source);
+            console.log("sourceArr: ", sourceArr);
+            console.log("fullArr: ", fullArr);
+            fullArr.sort(compare);
+
+        $('#geneSetDiv').DataTable( {
+                    data: fullArr,
+                    "order": [[ 0, "desc" ]],
+                    retrieve: true,
+                    columns: [
+                        /*{ data: 'Gene', "title": 'Gene', 
+                            "render": function ( data, type, full, meta ) {
+                                return '<a href="#" onClick="addTrans(\''+data+'\')">'+data+'</a>';
+                            } 
+                        },*/
+                        { data: 'Gene.length', "title": 'deneme', "visible": false},
+                        { data: 'rsid', "title": 'SNP' },
+                        { data: 'Gene', "title": 'Gene' }
+
+                        
+                        //{ data: 'ProbeCenterChrPos', "title": 'Center-Pos'}         
+                    ]
+                } );
+
+    }
+
+
+    function geneSetDrawTrans(source) {
+            var dataSize = geneData.length;
+           // console.log("geneData length: ", dataSize);
+            
+            var vizDiv = document.getElementById("transDiv");
+
+            /*if(dataSize == 0) {              
+                vizDiv.style.fontSize = "14px";
+                vizDiv.style.fontWeight = "bold";
+                vizDiv.style.textAlign = "center";
+                vizDiv.style.border = "1px solid black";
+                vizDiv.innerHTML = "No Results Found";
+                removeControls();
+                removefilterControl();
+                $('#geneDataDiv').empty(); //remove Gene Data
+            }
+
+            else {*/
+                $('#transDiv').empty();
+                //vizDiv.innerHTML = "";
+                vizDiv.style.border = "";
+                vizDiv.style.textAlign = "left";
+                
+                removeControls();
+
+                           
+                //addGeneData(gene, dataSize);
+                //addfilterControl();
+                drawTrans(geneData, geneData[0].PValue, dataSize);
+                /*if(dataSize > 50) {
+                    addControls();
+                    //updateRange(0, 49);
+                }*/
+            
+            
+        
+        //console.log("geneData[0]: ", geneData[0]);
+          
+    
+
+
+    }
+
+
+    function drawTrans(data, topP, dataSize) {       
+        //draw in 'transDiv'
+        var viz = d3.select('#transDiv');
+        
+        //var wdth = 900, hght = 400;
+        if (dataSize >= 50)
+            wdth = 610;
+        
+        else
+            wdth = (dataSize * 12) + 10;
+
+        if(wdth < 200)
+            wdth = 200;
+        
+        var genePlaceholder = document.getElementById("geneVal");
+        genePlaceholder.placeholder = "Gene";
+
+        var superscript = "⁰¹²³⁴⁵⁶⁷⁸⁹",
+            formatPower = function(d) { return (d + "").split("").map(function(c) { return superscript[c]; }).join(""); };
+        
+        svg = viz.append('svg')
+                    .attr({
+                        width: wdth + 30,
+                        height: hght + 20
+                    })
+                    .append("svg:g")
+                    .attr("class", "graph-svg-component")
+                    .attr("id", "westra-svg")
+                    .attr("transform", "translate(" + 0 + "," + 0 +")");
+
+        var xScale = d3.scale.linear()
+                        .domain([1, 100]) 
+                        .range([0,wdth]);
+        
+        var xAxis = d3.svg.axis()
+                        .scale(xScale)
+                        .orient("bottom")
+                        .ticks(0)
+                        .tickSize(1);
+
+        var yScale = d3.scale.log()
+                        .domain([1, topP]) 
+                        .range([hght - 10,10]); 
+        
+        var y = d3.scale.linear()
+                        //.base(Math.E)
+                        .domain([1e-5, topP])
+                        .range([hght - 10, 0]);
+
+        var yAxis = d3.svg.axis()
+                        .scale(yScale)                      
+                        .tickFormat(function(d) { return "e" + Math.round(Math.log(d)); })
+                        .orient("left")
+                        .tickValues([1e-100,1e-80,1e-40,1e-20])
+                        .ticks(8)
+                        .tickSize(1);
+        
+
+        // Define the div for the tooltip
+        var div = d3.select("body")
+                        .append("div")   
+                        .attr("class", "tooltip")               
+                        .style("opacity", 0);
+
+        var formatP = d3.format(",.4e");
+
+        var selection = svg.selectAll("circle")
+                            .data(data, function(d) { return d.PValue+""+d.SNPName; });
+
+        selection.exit().remove();
+        
+        selection.enter().append('circle')
+                        .attr('class', 'circle')
+                        .attr('cx', function (d, i) {return (i+2)*12;}) 
+                        .attr('cy', function (d) {return yScale(d.PValue)+5;})//yScale(Math.pow(d.PValue, 0.46))+5;})
+                        .attr('r', function (d) {
+                            if(d.SNPName == SNP_interest)
+                                return 6;    
+                            else
+                                return 5;
+                        })
+                        .attr("transform", "translate(20,0)")
+                        .style("fill", function (d) {
+                                if(d.SNPName == SNP_interest)
+                                    return "red";
+                        })
+                        .on("mouseover", function(d) {
+                            this.setAttribute('r', '8');
+                            div.transition()        
+                                .duration(100)      
+                                .style("opacity", .9);      
+                            div.html("<strong>" + "P-value: " + "</strong>" + formatP(d.PValue) + "<br/>"   + "<strong>" + "rsid: " + "</strong>" + d.SNPName + "<br/>"  + 
+                                     "<strong>" + "SNP-Pos: " + "</strong>" + d.SNPChr + ":" + d.SNPChrPos + "<br/>" +
+                                     "<strong>" + "Gene: " + "</strong>" + d.Gene + "<br/>"  +
+                                     "<strong>" + "Gene-Pos: " + "</strong>" + d.ProbeChr + ":" + d.ProbeCenterChrPos)  
+                                .style("left", (d3.event.pageX + 10) + "px")     
+                                .style("top", (d3.event.pageY - 28) + "px");
+                        })
+                        .on("click", function(d){
+                            SNP_interest = d.SNPName;
+
+                            d3.selectAll(".tooltip").remove();
+                            addTrans(d.Gene);
+                            $('.dataTables_wrapper').empty();
+                            //$('#rsTableDiv_wrapper').empty();
+                            eqtlDetails(formatP(d.PValue), d.SNPName, d.SNPChr, d.SNPChrPos, d.Gene, d.ProbeChr, d.ProbeCenterChrPos );
+                        })
+                        .on("mouseout", function(d){
+                            if(d.SNPName == SNP_interest)
+                                this.setAttribute('r', '6');
+                            else
+                                this.setAttribute('r', '5');
+                            div.transition()        
+                                .duration(100)      
+                                .style("opacity", 0);
+                        });
+     
+        /*
+        //Add Title
+        svg.append("text")
+                .attr("x", (wdth / 2))             
+                .attr("y", 20)
+                .attr("text-anchor", "middle")  
+                .style("font-size", "16px")
+                .style("font-weight", "bold") 
+                //.style("text-decoration", "underline")  
+                .text("Dataset: Westra");
+        
+        
+        svg.append("text")
+                .attr("x", (wdth / 2))             
+                .attr("y", 40)
+                .attr("text-anchor", "middle")  
+                .style("font-size", "16px") 
+                //.style("text-decoration", "underline")  
+                .text("Trans-eQTL Graph");
+
+       */
+
+        svg.append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", 0)
+              .attr("x", -200)
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .text("-log10(P-value)");
+
+
+        svg.append("text")
+                .attr("x", (wdth / 2 ))             
+                .attr("y", 420)
+                .attr("text-anchor", "middle")  
+                .style("font-size", "14px") 
+                //.style("text-decoration", "underline")  
+                .text("Trans-eQTLs");
+        
+        
+        // create left yAxis
+        svg.append("g")
+                .attr("class", "axis axis--y")
+                .attr("transform", "translate(20, 0)")
+                .call(yAxis);
+
+        // create xAxis
+        svg.append("g")
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(20, 400)")
+                .call(xAxis);
+
+        
+        //add border
+       svg.append("rect")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("height", hght+20)
+                .attr("width", wdth+30)
+                .style("stroke", "dodgerblue")
+                .style("fill", "none")
+                .style("stroke-width", 1);
+    }
+
+
+    function drawCis(datasetvalues) {
+        var cisDiv = document.getElementById("igvDiv");
+        cisDiv.style.visibility = "visible";
+        cisDiv.style.marginTop = "-10px";
+
+        var genePlaceholder = document.getElementById("geneVal");
+        var gene = document.getElementById("geneVal").value;
+        var location = gene;
+
+        if (location == "") {
+            location = "chr1:155,160,475-155,184,282";
+            genePlaceholder.placeholder = location;
+        }
+
+        else
+            genePlaceholder.placeholder = "Gene";
+
+        var div = $("#igvDiv")[0],
+                options = {
+                    showNavigation: true,
+                    showRuler: true,
+                    locus: location,
+                    reference: {
+                        id: "hg19"
+                    },
+                    tracks: [
+                        
+                    ]
+                };
+
+        igv.createBrowser(div, options);
+
+        igv.browser.loadTrack({
+            name: "Genes",
+                            type: "annotation",
+                            format: "gtf",
+                            sourceType: "file",
+                            height: "200",
+                            url: "https://s3.amazonaws.com/igv.broadinstitute.org/annotations/hg19/genes/gencode.v18.annotation.sorted.gtf.gz",
+                            indexURL: "https://s3.amazonaws.com/igv.broadinstitute.org/annotations/hg19/genes/gencode.v18.annotation.sorted.gtf.gz.tbi",
+                            visibilityWindow: 10000000,
+                            order: Number.MAX_VALUE,
+                            displayMode: "EXPANDED"
+                        });
+
+        setTimeout(loadCisTracks, 1000, datasetvalues);
+
+    }
+
+
+    function loadCisTracks(datasetvalues) {
+        var dataset = document.getElementById("datasetT").value;
+        var commonCis = [];
+        var remaining = datasetvalues.length;
+
+        console.log("Remaining: ", remaining);
+
+        //console.log("Datasetvalue length: ", datasetvalues.length);
+        for (var i = 0; i < datasetvalues.length; i++) {
+
+            //Framingham dataset
+            if(datasetvalues[i] == 11) {
+                d3.tsv("./data/fram-cis.txt", function(rows11) {
+                    cisData11 = rows11;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });
+            }
+
+            //GTEx dataset
+            else if (datasetvalues[i] == 12) {
+                d3.tsv("./data/gtex.txt", function(rows12) {
+                    cisData12 = rows12;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                }); 
+            }
+
+            //Westra dataset
+            else if (datasetvalues[i] == 13) {
+                d3.tsv("./data/westra-hg19.txt", function(rows13) {
+                    cisData13 = rows13;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });
+            }
+
+            else if (datasetvalues[i] == 21) {                
+                d3.tsv("./data/jager/monocytes-aa-cis.txt", function(rows21) {
+                    cisData21 = rows21;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                }); 
+            }
+
+            else if (datasetvalues[i] == 22) {
+                d3.tsv("./data/jager/monocytes-ea-cis.txt", function(rows22) {
+                    cisData22 = rows22;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });               
+            }
+
+            else if (datasetvalues[i] == 23) {
+                d3.tsv("./data/jager/monocytes-eu-cis.txt", function(rows23) {
+                    cisData23 = rows23;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });
+            }
+
+            else if (datasetvalues[i] == 25) {               
+                d3.tsv("./data/fairfax/mono-cis.txt", function(rows25) {
+                    cisData25 = rows25;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });
+            }
+
+            else if (datasetvalues[i] == 26) {               
+                d3.tsv("./data/fairfax/mono-cis-naive.txt", function(rows26) {
+                    cisData26 = rows26;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });                
+            }
+
+            else if (datasetvalues[i] == 31) {
+                d3.tsv("./data/jager/cd4T-aa-cis.txt", function(rows31) {
+                    cisData31 = rows31;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });               
+            }
+
+            else if (datasetvalues[i] == 32) {
+                d3.tsv("./data/jager/cd4T-ea-cis.txt", function(rows32) {
+                    cisData32 = rows32;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });                
+            }
+
+            else if (datasetvalues[i] == 33) {
+                d3.tsv("./data/jager/cd4T-eu-cis.txt", function(rows33) {
+                    cisData33 = rows33;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });               
+            }
+
+            else if (datasetvalues[i] == 41) {
+                d3.tsv("./data/fairfax/bcell-cis.txt", function(rows41) {
+                    cisData41 = rows41;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });                
+            }
+
+            else if (datasetvalues[i] == 51) {
+                d3.tsv("./data/fairfax/neutrophils-cis-final.txt", function(rows51) {
+                    cisData51 = rows51;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });
+            }
+
+            else if (datasetvalues[i] == 61) {
+                d3.tsv("./data/fairfax/mono-cis-lps2.txt", function(rows61) {
+                    cisData61 = rows61;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });                 
+            }
+
+            else if (datasetvalues[i] == 62) {
+                d3.tsv("./data/fairfax/mono-cis-lps24.txt", function(rows62) {
+                    cisData62 = rows62;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });                
+            }
+
+            else if (datasetvalues[i] == 63) {
+                d3.tsv("./data/fairfax/mono-cis-ifn.txt", function(rows63) {
+                    cisData63 = rows63;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });               
+            }
+
+            else if (datasetvalues[i] == 71) {
+                d3.tsv("./data/1000G/eur.txt", function(rows71) {
+                    cisData71 = rows71;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });               
+            }
+
+            else if (datasetvalues[i] == 72) {
+                d3.tsv("./data/1000G/yri.txt", function(rows72) {
+                    cisData72 = rows72;
+                    remaining--;
+                    
+                    if(remaining == 0)
+                        drawCisTracks(datasetvalues); 
+                });               
+            }
+        }
+
+    }
+
+
+    function drawCisTracks(datasetvalues) {
+        var geneCis = [];
+        var gene = document.getElementById("geneVal").value;
+        var obj = {};
+
+        console.log("DATASET VALUES: ", datasetvalues);
+       
+        for (var i = 0; i < datasetvalues.length; i++) {
+
+            if(datasetvalues[i] == 11) {
+                for(var j = 0; j < cisData11.length; j++)
+                {
+                    if(cisData11[j].GENE == gene ) 
+                    {
+                        obj = {source: "11", snp: cisData11[j].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData21: ", cisData21);
+            }
+
+            else if(datasetvalues[i] == 12) {
+                for(var j = 0; j < cisData12.length; j++)
+                {
+                    if(cisData12[j].GENE == gene ) 
+                    {
+                        obj = {source: "12", snp: cisData12[j].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData21: ", cisData21);
+            }
+
+            else if(datasetvalues[i] == 13) {
+                for(var j = 0; j < cisData13.length; j++)
+                {
+                    if(cisData13[j].GENE == gene ) 
+                    {
+                        obj = {source: "13", snp: cisData13[j].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData21: ", cisData21);
+            }
+
+            else if(datasetvalues[i] == 21) {
+                for(var j = 0; j < cisData21.length; j++)
+                {
+                    if(cisData21[j].GENE == gene ) 
+                    {
+                        obj = {source: "21", snp: cisData21[j].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData21: ", cisData21);
+            }
+
+            else if(datasetvalues[i] == 22) {
+                for(var k = 0; k < cisData22.length; k++)
+                {
+                    if(cisData22[k].GENE == gene )
+                    {
+                        obj = {source: "22", snp: cisData22[k].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData63: ", cisData63);
+            }
+
+            else if(datasetvalues[i] == 23) {
+                for(var k = 0; k < cisData23.length; k++)
+                {
+                    if(cisData23[k].GENE == gene )
+                    {
+                        obj = {source: "23", snp: cisData23[k].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData63: ", cisData63);
+            }
+
+            else if(datasetvalues[i] == 25) {
+                for(var k = 0; k < cisData25.length; k++)
+                {
+                    if(cisData25[k].GENE == gene )
+                    {
+                        obj = {source: "25", snp: cisData25[k].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData63: ", cisData63);
+            }
+
+            else if(datasetvalues[i] == 26) {
+                for(var k = 0; k < cisData26.length; k++)
+                {
+                    if(cisData26[k].GENE == gene )
+                    {
+                        obj = {source: "26", snp: cisData26[k].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData63: ", cisData63);
+            }
+
+            else if(datasetvalues[i] == 31) {
+                for(var k = 0; k < cisData31.length; k++)
+                {
+                    if(cisData31[k].GENE == gene )
+                    {
+                        obj = {source: "31", snp: cisData31[k].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData63: ", cisData63);
+            }
+
+            else if(datasetvalues[i] == 32) {
+                for(var k = 0; k < cisData32.length; k++)
+                {
+                    if(cisData32[k].GENE == gene )
+                    {
+                        obj = {source: "32", snp: cisData32[k].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData63: ", cisData63);
+            }
+
+            else if(datasetvalues[i] == 33) {
+                for(var k = 0; k < cisData33.length; k++)
+                {
+                    if(cisData33[k].GENE == gene )
+                    {
+                        obj = {source: "33", snp: cisData33[k].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData63: ", cisData63);
+            }
+
+            else if(datasetvalues[i] == 41) {
+                for(var k = 0; k < cisData41.length; k++)
+                {
+                    if(cisData41[k].GENE == gene )
+                    {
+                        obj = {source: "41", snp: cisData41[k].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData63: ", cisData63);
+            }
+
+            else if(datasetvalues[i] == 51) {
+                for(var k = 0; k < cisData51.length; k++)
+                {
+                    if(cisData51[k].GENE == gene )
+                    {
+                        obj = {source: "51", snp: cisData51[k].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData63: ", cisData63);
+            }
+
+            else if(datasetvalues[i] == 61) {
+                for(var k = 0; k < cisData61.length; k++)
+                {
+                    if(cisData61[k].GENE == gene )
+                    {
+                        obj = {source: "61", snp: cisData61[k].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData63: ", cisData63);
+            }
+
+            else if(datasetvalues[i] == 62) {
+                for(var k = 0; k < cisData62.length; k++)
+                {
+                    if(cisData62[k].GENE == gene )
+                    {
+                        obj = {source: "62", snp: cisData62[k].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData63: ", cisData63);
+            }
+
+            else if(datasetvalues[i] == 63) {
+                for(var k = 0; k < cisData63.length; k++)
+                {
+                    if(cisData63[k].GENE == gene )
+                    {
+                        obj = {source: "63", snp: cisData63[k].SNP}
+                        geneCis.push(obj);
+                    }
+                }
+                //console.log("CisData63: ", cisData63);
+            }
+        }
+
+        //console.log("GeneCis: ", geneCis);
+        var CommonCisData = calcCommonCis(geneCis);
+        console.log("CommonCisData: ", CommonCisData);
+
+        
+        for (var i = 0; i < datasetvalues.length; i++) {
+
+            if(datasetvalues[i] == 11) {
+                igv.browser.loadTrack({
+                                     url: './data/fram-cis.txt',
+                                    name: 'Framingham',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    //colorScale: {
+                                    //    thresholds: [],
+                                    //    colors:['rgb(122,179,23)']
+                                    //},
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },
+                                    minLogP: 10,
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'Framingham'});
+            }
+
+            else if(datasetvalues[i] == 12) {
+                igv.browser.loadTrack({
+                                     url: './data/gtex.txt', 
+                                    name: 'GTEx', //GTEx Whole_Blood
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [5e-8, 5e-4, 0.05],
+                                        colors:['rgb(122,179,23)']
+                                    },
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'GTEx'});
+            }
+
+            else if(datasetvalues[i] == 13) {
+                igv.browser.loadTrack({
+                                    url: './data/westra-hg19.txt',
+                                    name: 'Westra',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },                                 
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'Westra'});
+            }
+
+            else if(datasetvalues[i] == 21) {             
+                igv.browser.loadTrack({
+                                    url: './data/jager/monocytes-aa-cis.txt',
+                                    name: 'Mono-AA',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    }, 
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'MonoAA'});
+            }
+
+            else if(datasetvalues[i] == 22) {
+                igv.browser.loadTrack({
+                                    url: './data/jager/monocytes-ea-cis.txt',
+                                    name: 'mono-EA',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },                                  
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'MonoEA'});
+            }
+
+            else if(datasetvalues[i] == 23) {            
+                igv.browser.loadTrack({
+                                    url: './data/jager/monocytes-eu-cis.txt',
+                                    name: 'mono-EU',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },                                 
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'MonoEU'});
+            }
+
+            else if(datasetvalues[i] == 25) {           
+                igv.browser.loadTrack({
+                                    url: './data/fairfax/mono-cis.txt',
+                                    name: 'mono-fairfax',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },                                
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'MonoFairfax'});
+
+            }
+
+            else if(datasetvalues[i] == 26) {            
+                igv.browser.loadTrack({
+                                    url: './data/fairfax/mono-cis-naive.txt',
+                                    name: 'mono-fairfax-EurAme',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },                                  
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'MonoFairfax-EurAme'});
+            }
+
+            else if(datasetvalues[i] == 31) {               
+                igv.browser.loadTrack({
+                                    url: './data/jager/cd4T-aa-cis.txt',
+                                    name: 'cd4T-aa',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },                                 
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'cd4T-AA'});
+            }
+
+            else if(datasetvalues[i] == 32) {           
+                igv.browser.loadTrack({
+                                    url: './data/jager/cd4T-ea-cis.txt',
+                                    name: 'cd4T-ea',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },                                 
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'cd4T-EA'});
+            }
+
+            else if(datasetvalues[i] == 33) {
+                igv.browser.loadTrack({
+                                    url: './data/jager/cd4T-eu-cis.txt',
+                                    name: 'cd4T-eu',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },                                   
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'cd4T-EU'});
+            }
+
+            else if(datasetvalues[i] == 41) {                
+                igv.browser.loadTrack({
+                                    url: './data/fairfax/bcell-cis.txt',
+                                    name: 'Bcell',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },                                  
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'Bcell'});
+            }
+
+            else if(datasetvalues[i] == 51) {            
+                igv.browser.loadTrack({
+                                    url: './data/fairfax/neutrophils-cis-final.txt',
+                                    name: 'neutrophils',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },                                 
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'Neutrophils'});
+            }
+       
+            else if(datasetvalues[i] == 61) {              
+                igv.browser.loadTrack({
+                                    url: './data/fairfax/mono-cis-lps2.txt',
+                                    name: 'mono-LPS2h-EurAme',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'Mono-LPS2h-EurAme'});           
+            }
+
+            else if(datasetvalues[i] == 62) {              
+               igv.browser.loadTrack({
+                                    url: './data/fairfax/mono-cis-lps24.txt',
+                                    name: 'mono-LPS24h-EurAme',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },                                
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'Mono-LPS24h-EurAme'});               
+            }
+
+            else if(datasetvalues[i] == 63) {          
+                igv.browser.loadTrack({
+                                    url: './data/fairfax/mono-cis-ifn.txt',
+                                    name: 'mono-IFNgamma-EurAme',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'Mono-IFNgamma-EurAme'});
+            }
+
+            else if(datasetvalues[i] == 71) {          
+                igv.browser.loadTrack({
+                                    url: './data/1000G/eur.txt',
+                                    name: 'LCL-1000G-Eur',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'LCL-1000G-Eur'});
+            }
+
+            else if(datasetvalues[i] == 72) {          
+                igv.browser.loadTrack({
+                                    url: './data/1000G/yri.txt',
+                                    name: 'LCL-1000G-Yri',
+                                    format: 'gtexGWAS',
+                                    featureType: 'gwas',
+                                    colorScale: {
+                                        thresholds: [],
+                                        colors:['rgb(30,144,255)']
+                                    },
+                                    maxLogP: 16,
+                                    height: 150,
+                                    commonCis: CommonCisData,
+                                    label: 'LCL-1000G-Yri'});
+            }
+
+        }
+
+    }
+
+
+    function calcCommonCis(geneCis)
+    {
+        var frequency = {}, source = {}, value, src;
+
+        // compute frequencies of each value
+        for(var i = 0; i < geneCis.length; i++) {
+            value = geneCis[i].snp;
+            src = geneCis[i].source;
+            
+            if(value in frequency) {
+                if(source[value] != src)
+                    frequency[value]++;
+            }
+            
+            else {
+                frequency[value] = 1;
+                source[value] = src;
+            }
+        }
+
+        var common = [];
+
+        for(value in frequency) {
+            if(frequency[value] >= 2)
+                common.push(value);
+        }
+
+        return common;
+    }
+
+
+    function calcCommonTrans(geneSetData)
+    {
+        var snpData = [], junkArr = [], snpObj = {}, frequency = {}, source = {}, value, gene, pValue, snppos, genepos, geneObj = {}, index = {}, snp = [];
+
+        // compute frequencies of each value
+        for(var i = 0; i < geneSetData.length; i++) {
+            value = geneSetData[i].SNPName;
+            snp = [];
+            //snp.push(value);
+            gene = geneSetData[i].Gene;
+            pValue = geneSetData[i].PValue;
+            snppos = geneSetData[i].SNPChr + ":" + geneSetData[i].SNPChrPos; 
+            genepos = geneSetData[i].ProbeChr + ":" + geneSetData[i].ProbeCenterChrPos;
+
+            if(value in frequency) {
+                if(source[value].Gene != gene)
+                    frequency[value]++;
+                    
+                geneObj = {Pvalue: pValue, rsid: value, SNPPos: snppos, Gene: gene, GenePos: genepos};
+                //snp.push(geneObj);
+                source[value].push(geneObj);// = snp;
+            }
+            
+            else {
+                frequency[value] = 1;
+                geneObj = {Pvalue: pValue, rsid: value, SNPPos: snppos, Gene: gene, GenePos: genepos};
+                
+                snp.push(geneObj);
+                source[value] = snp; //push(geneObj);
+                //index[value] = i;
+            }
+        }
+
+        var common = [];
+        console.log("FREQUENCY: ", frequency);
+        console.log("SOURCE: ", source);
+        for(value in frequency) {
+            if(frequency[value] >= 2)
+                console.log("Frequency: ", frequency[value], " --- SNP: ", value, " Genes: ", source[value]);
+                //common.push(value);
+        }
+
+        //return common;
+        geneSetTrans(frequency, source);
+    }
+
+
+</script>
+
+</body>
+
+</html>
